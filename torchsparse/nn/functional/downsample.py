@@ -26,7 +26,8 @@ def spdownsample(
         coords = coords.clone()
         coords[:, :3] = torch.div(
             coords[:, :3],
-            sample_stride.float()).trunc() * sample_stride  # type: ignore
+            sample_stride.float(),
+            rounding_mode='trunc') * sample_stride  # type: ignore
         coords = coords[:, [3, 0, 1, 2]]
         coords = torch.unique(coords, dim=0)
         coords = coords[:, [1, 2, 3, 0]]
